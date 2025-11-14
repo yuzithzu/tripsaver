@@ -8,8 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#f6f8fb;--card:#fff;--accent:#0b61ff;--muted:#6b7280;}
-    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-    body{margin:0;background:linear-gradient(180deg,var(--bg),#eef3ff);color:#0f1724;}
+    /* Pinalitan ang "*" selector ng mas specific na selectors para sa mas mabilis na rendering */
+    html, body{margin:0;padding:0;}
+    body{
+        background:linear-gradient(180deg,var(--bg),#eef3ff);
+        color:#0f1724;
+        font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    }
+    *{box-sizing:border-box;}
     .container{max-width:1100px;margin:24px auto;padding:16px;display:flex;flex-direction:column;gap:20px;}
     header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
     .brand{display:flex;align-items:center;gap:12px;}
@@ -35,7 +41,7 @@
     @keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
     @media(max-width:600px){.slider-item{width:70%;}}
 
-    /* Iframe Grid Section - NEW */
+    /* Iframe Grid Section */
     .iframe-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px;}
     .iframe-item{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,36,0.04);text-align:center;display:flex;justify-content:center;align-items:center;}
     .iframe-item iframe{width:300px;height:250px;border:0;}
@@ -59,8 +65,8 @@
         </div>
       </div>
       <nav>
-        <a class="muted" href="#promos">Promos</a>
-        <a class="muted" href="#affiliates">Affiliates</a>
+        <a class="muted" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener noreferrer">Promos</a>
+        <a class="muted" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener noreferrer">Affiliates</a>
         <a class="btn" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener noreferrer">Book Now</a>
       </nav>
     </header>
@@ -114,7 +120,7 @@
       </div>
     </section>
 
-    <section class="promo-slider" id="promos">
+    <section class="promo-slider" id="promos-section">
       <div class="slider-container">
         <div class="slider-track">
           <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/28065/everydayescape.html','_blank')">
@@ -145,18 +151,18 @@
       </div>
     </section>
     
-    <section class="iframe-grid" id="affiliates" aria-label="Affiliate Banners">
+    <section class="iframe-grid" id="affiliates-section" aria-label="Affiliate Banners">
         <div class="iframe-item">
             <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1=" 
-                frameborder="0" scrolling="no" title="Trip.com Banner 1" style="border:none;"></iframe>
+                frameborder="0" scrolling="no" title="Trip.com Banner 1" style="border:none;" loading="lazy"></iframe>
         </div>
         <div class="iframe-item">
             <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1=" 
-                frameborder="0" scrolling="no" title="Trip.com Banner 2" style="border:none;"></iframe>
+                frameborder="0" scrolling="no" title="Trip.com Banner 2" style="border:none;" loading="lazy"></iframe>
         </div>
         <div class="iframe-item">
             <iframe src="https://www.trip.com/partners/ad/DB6637990?Allianceid=7325312&SID=274746697&trip_sub1=" 
-                frameborder="0" scrolling="no" title="Trip.com Banner 3" style="border:none;"></iframe>
+                frameborder="0" scrolling="no" title="Trip.com Banner 3" style="border:none;" loading="lazy"></iframe>
         </div>
     </section>
 
