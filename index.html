@@ -7,61 +7,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#f6f8fb;--card:#fff;--accent:#0b61ff;--muted:#6b7280;--glass:rgba(255,255,255,0.6)}
-    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{margin:0;background:linear-gradient(180deg,var(--bg),#eef3ff);color:#0f1724}
-    .container{max-width:1100px;margin:24px auto;padding:16px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#6b9cff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-    .title{font-size:18px;font-weight:700}
-    nav{display:flex;gap:12px;align-items:center}
-    a.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(11,97,255,0.12)}
+    :root{--bg:#f6f8fb;--card:#fff;--accent:#0b61ff;--muted:#6b7280;}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#eef3ff);color:#0f1724;}
+    .container{max-width:1100px;margin:24px auto;padding:16px;display:flex;flex-direction:column;gap:20px;}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#6b9cff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;}
+    .title{font-size:18px;font-weight:700;}
+    nav{display:flex;gap:12px;align-items:center;}
+    a.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(11,97,255,0.12);}
 
     /* Search card */
-    .search-card{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(15,23,36,0.06);display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}
-    .field{display:flex;flex-direction:column}
-    label{font-size:12px;color:var(--muted);margin-bottom:6px}
-    input,select{padding:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px}
-    .wide{grid-column:1/-1;display:flex;gap:12px}
-    .search-actions{display:flex;gap:8px;align-items:center}
-    .filters{display:flex;gap:8px;align-items:center}
+    .search-card{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(15,23,36,0.06);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;align-items:center;}
+    .field{display:flex;flex-direction:column;}
+    label{font-size:12px;color:var(--muted);margin-bottom:6px;}
+    input,select{padding:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px;}
+    .wide{grid-column:1/-1;display:flex;gap:12px;}
+    .search-actions{display:flex;gap:8px;align-items:center;}
 
-    /* Promos & cards */
-    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
-    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,36,0.04)}
-    .promo-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-    .promo{padding:12px;border-radius:10px;border:1px dashed #e6eefc}
-    .promo a{display:block;text-decoration:none;color:var(--accent);font-weight:600;margin-top:8px}
+    /* PROMO SLIDER */
+    .slider-container{position:relative;overflow:hidden;border-radius:14px;margin:20px 0;}
+    .slider-track{display:flex;gap:14px;padding:12px;animation:slide 18s linear infinite;}
+    .slider-item{flex:0 0 auto;width:260px;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04);cursor:pointer;text-align:center;}
+    .slider-item h4{margin:0 0 6px 0;font-size:16px;font-weight:700;}
+    .slider-item p{margin:0;font-size:13px;color:var(--muted);}
+    @keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+    @media(max-width:600px){.slider-item{width:70%;}}
 
-    /* Affiliate iframe area responsive */
-    .iframe-wrap{width:100%;overflow:hidden;border-radius:12px}
-    .iframe-wrap iframe{width:100%;height:320px;border:0}
-
-    /* Two-column layout on larger screens */
-    @media(min-width:880px){
-      .grid{grid-template-columns:2fr 320px}
-      .search-card{grid-template-columns:repeat(4,1fr)}
-      .wide{grid-column:1/-1}
-      .iframe-wrap iframe{height:420px}
+    /* Iframe Grid Section - NEW */
+    .iframe-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px;}
+    .iframe-item{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(15,23,36,0.04);text-align:center;display:flex;justify-content:center;align-items:center;}
+    .iframe-item iframe{width:300px;height:250px;border:0;}
+    @media(min-width:640px){
+        .iframe-grid{grid-template-columns:repeat(3, 1fr);}
     }
 
-    footer{margin:26px 0;text-align:center;color:var(--muted);font-size:13px}
-
-    /* small helpers */
-    .muted{color:var(--muted);font-size:13px}
-    .btn-ghost{background:transparent;border:1px solid #e6eefc;padding:9px;border-radius:10px}
+    footer{margin:26px 0;text-align:center;color:var(--muted);font-size:13px;}
+    .muted{color:var(--muted);font-size:13px;}
+    .btn-ghost{background:transparent;border:1px solid #e6eefc;padding:9px;border-radius:10px;}
   </style>
-<style>
-  body { font-family: 'Poppins', sans-serif; margin:0; padding:0; background:#f4f7fb; color:#333; }
-  .container { max-width:1200px; margin:auto; padding:20px; }
-  h1, h2, h3 { font-weight:600; text-align:center; margin-bottom:15px; }
-  a, button { transition:0.3s; }
-  a:hover, button:hover { opacity:0.8; }
-  .promo, .card, .banner-box { background:#fff; border-radius:14px; padding:18px; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:20px; }
-  iframe { width:100%; border:none; border-radius:12px; }
-  @media(max-width:768px){ .promo, .card, .banner-box { padding:14px; } }
-</style>
 </head>
 <body>
   <div class="container">
@@ -80,7 +65,6 @@
       </nav>
     </header>
 
-    <!-- Search / Booking card -->
     <section class="search-card" aria-label="Search flights and hotels">
       <div class="field">
         <label for="type">Type</label>
@@ -91,22 +75,18 @@
           <option>Train</option>
         </select>
       </div>
-
       <div class="field">
         <label for="destination">Destination</label>
         <input id="destination" placeholder="Where to? (e.g. Singapore)" />
       </div>
-
       <div class="field">
         <label for="checkin">Check-in</label>
         <input id="checkin" type="date" />
       </div>
-
       <div class="field">
         <label for="checkout">Check-out</label>
         <input id="checkout" type="date" />
       </div>
-
       <div class="field">
         <label for="guests">Guests</label>
         <select id="guests">
@@ -115,7 +95,6 @@
           <option>Family (2 Adults, 1 Child)</option>
         </select>
       </div>
-
       <div class="field">
         <label for="class">Class / Room</label>
         <select id="class">
@@ -125,117 +104,61 @@
           <option>First Class</option>
         </select>
       </div>
-
       <div class="wide search-actions">
         <button class="btn" id="searchBtn">Search deals</button>
         <button class="btn-ghost" id="clearBtn">Clear</button>
         <div style="margin-left:auto;font-size:13px;color:var(--muted);align-self:center">Secure booking via affiliates</div>
       </div>
+      <div class="wide" style="text-align:right; margin-top: -10px;">
+        <a href="https://www.trip.com/w/KrcJGyZ6HS2" target="_blank" rel="noopener noreferrer" class="muted" style="text-decoration:none;">Exclusive Flight Deals here</a>
+      </div>
     </section>
 
-    <!-- Main grid: promos + affiliate widgets -->
-    <main class="grid">
-      <div>
-        <section class="card" id="promos">
-          <h3 style="margin:0 0 8px 0">Featured Promo Campaigns</h3>
-          <div class="promo-list">
-            <div class="promo" style="cursor:pointer" onclick="window.open(this.querySelector('a').href,'_blank')">
-              <div style="font-weight:700">Everyday Escape</div>
-              <div class="muted">Special savings on everyday getaways.</div>
-              <a href="https://sg.trip.com/sale/w/28065/everydayescape.html?locale=en-SG&promo_referer=3371_28065_1&Allianceid=7325312&SID=274746697&trip_sub1=&trip_sub3=P6645095" target="_blank" rel="noopener">View Promo</a>
-            </div>
-
-            <div class="promo" style="cursor:pointer" onclick="window.open(this.querySelector('a').href,'_blank')">
-              <div style="font-weight:700">Holiday Deals 2025</div>
-              <div class="muted">Seasonal discounts & curated packages.</div>
-              <a href="https://sg.trip.com/sale/w/27435/holidaydeals2025.html?locale=en-sg&curr=sgd&transparentBar=1&promo_referer=3371_27435_3&Allianceid=7325312&SID=274746697&trip_sub1=&trip_sub3=P6645144" target="_blank" rel="noopener">See Offers</a>
-            </div>
-
-            <div class="promo" style="cursor:pointer" onclick="window.open(this.querySelector('a').href,'_blank')">
-              <div style="font-weight:700">Swiss Travel Pass 2025</div>
-              <div class="muted">Rail passes, experiences & tours.</div>
-              <a href="https://sg.trip.com/sale/w/14373/swisstravelpass2025.html?locale=en-SG&promo_referer=3371_14373_2&Allianceid=7325312&SID=274746697&trip_sub1=&trip_sub3=P6645158" target="_blank" rel="noopener">Buy Pass</a>
-            </div>
-
-            <div class="promo" style="cursor:pointer" onclick="window.open(this.querySelector('a').href,'_blank')">
-              <div style="font-weight:700">Travel Ideas</div>
-              <div class="muted">Inspiration, guides & curated channels.</div>
-              <a href="https://sg.trip.com/travel-ideas/channel/365?locale=en-SG&source=appanda&promo_referer=3371_null_7&Allianceid=7325312&SID=274746697&trip_sub1=&trip_sub3=P6645165" target="_blank" rel="noopener">Explore</a>
-            </div>
+    <section class="promo-slider" id="promos">
+      <div class="slider-container">
+        <div class="slider-track">
+          <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/28065/everydayescape.html','_blank')">
+            <h4>Everyday Escape</h4>
+            <p>Special savings on everyday getaways.</p>
           </div>
-        </section>
-
-        <section class="card" style="margin-top:12px" id="affiliates">
-          <h3 style="margin:0 0 8px 0">Hot Deals</h3>
-          <p class="muted">Use the button below to go straight to our main booking page.</p>
-          <a class="btn" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener">Book Here</a>
-
-          <div style="margin-top:12px">
-            <div class="muted" style="margin-bottom:8px">book here:</div>
-
-            <!-- Responsive iframe wrappers provided by user -->
-            <div class="iframe-wrap" style="margin-bottom:10px">
-              <!-- TD6645172 -->
-              <iframe src="https://www.trip.com/partners/ad/TD6645172?Allianceid=7325312&SID=274746697&trip_sub1=" id="TD6645172" loading="lazy" title="Promo TD6645172"></iframe>
-            </div>
-
-            <div class="iframe-wrap" style="margin-bottom:10px">
-              <iframe src="https://www.trip.com/partners/ad/TD6645242?Allianceid=7325312&SID=274746697&trip_sub1=" id="TD6645242" loading="lazy" title="Promo TD6645242"></iframe>
-            </div>
-
-            <div class="iframe-wrap" style="margin-bottom:10px">
-              <iframe src="https://www.trip.com/partners/ad/TD6645270?Allianceid=7325312&SID=274746697&trip_sub1=" id="TD6645270" loading="lazy" title="Promo TD6645270"></iframe>
-            </div>
-
+          <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/27435/holidaydeals2025.html','_blank')">
+            <h4>Holiday Deals 2025</h4>
+            <p>Seasonal discounts & curated packages.</p>
           </div>
-        </section>
-
-        <section class="card" style="margin-top:12px">
-          <h3 style="margin:0 0 8px 0">Banners</h3>
-          <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <div style="flex:1;min-width:120px">
-              <div class="iframe-wrap">
-                <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1=" id="SB6639173" title="SB6639173" loading="lazy"></iframe>
-              </div>
-            </div>
-
-            <div style="flex:1;min-width:120px">
-              <div class="iframe-wrap">
-                <iframe src="https://www.trip.com/partners/ad/DB6637990?Allianceid=7325312&SID=274746697&trip_sub1=" id="DB6637990" title="DB6637990" loading="lazy"></iframe>
-              </div>
-            </div>
+          <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/14373/swisstravelpass2025.html','_blank')">
+            <h4>Swiss Travel Pass 2025</h4>
+            <p>Rail passes, experiences & tours.</p>
           </div>
-        </section>
+          <div class="slider-item" onclick="window.open('https://sg.trip.com/travel-ideas/channel/365','_blank')">
+            <h4>Travel Ideas</h4>
+            <p>Inspiration, guides & curated channels.</p>
+          </div>
+          <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/28065/everydayescape.html','_blank')">
+            <h4>Everyday Escape</h4>
+            <p>Special savings on everyday getaways.</p>
+          </div>
+          <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/27435/holidaydeals2025.html','_blank')">
+            <h4>Holiday Deals 2025</h4>
+            <p>Seasonal discounts & curated packages.</p>
+          </div>
+        </div>
       </div>
-
-      <!-- Right column: quick summary / contact -->
-      <aside>
-        <div class="card">
-          <h4 style="margin:0 0 8px 0">Quick Book</h4>
-          <p class="muted">Click "Book Now"</p>
-          <a class="btn" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener">Book with Trip.com</a>
-
-          <div style="margin-top:12px">
-            <h5 style="margin:0 0 6px 0">Need Help?</h5>
-            <div class="muted">Contact us: <strong>support@tripsaver.com</strong></div>
-            <div style="margin-top:8px;font-size:13px" class="muted">Follow us for more promos</div>
-            <div style="display:flex;gap:8px;margin-top:10px">
-              <a class="btn-ghost" href="#">Facebook</a>
-              <a class="btn-ghost" href="#">Instagram</a>
-            </div>
-          </div>
+    </section>
+    
+    <section class="iframe-grid" id="affiliates" aria-label="Affiliate Banners">
+        <div class="iframe-item">
+            <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1=" 
+                frameborder="0" scrolling="no" title="Trip.com Banner 1" style="border:none;"></iframe>
         </div>
-
-        <div class="card" style="margin-top:12px">
-          <h5 style="margin:0 0 8px 0">Notes</h5>
-          <ul style="margin:0;padding-left:18px;color:var(--muted)">
-            <li>All bookings handled on partner site.</li>
-            <li>We may receive commission from bookings.</li>
-            <li>Promos subject to availability & T&Cs.</li>
-          </ul>
+        <div class="iframe-item">
+            <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1=" 
+                frameborder="0" scrolling="no" title="Trip.com Banner 2" style="border:none;"></iframe>
         </div>
-      </aside>
-    </main>
+        <div class="iframe-item">
+            <iframe src="https://www.trip.com/partners/ad/DB6637990?Allianceid=7325312&SID=274746697&trip_sub1=" 
+                frameborder="0" scrolling="no" title="Trip.com Banner 3" style="border:none;"></iframe>
+        </div>
+    </section>
 
     <footer>
       © <span id="year"></span> TripSaver — Built for mobile & desktop. Affiliates: Trip.com
@@ -243,40 +166,17 @@
   </div>
 
   <script>
-    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Basic search button behaviour - example that opens affiliate with query params
     document.getElementById('searchBtn').addEventListener('click', function(){
       const dest = encodeURIComponent(document.getElementById('destination').value || '');
-      const checkin = document.getElementById('checkin').value;
-      const checkout = document.getElementById('checkout').value;
-      // Build a simple affiliate redirect with trip_sub1 as destination
       const url = new URL('https://www.trip.com/t/PSAH4KF3HS2');
       if(dest) url.searchParams.set('trip_sub1', dest);
-      if(checkin) url.searchParams.set('checkin', checkin);
-      if(checkout) url.searchParams.set('checkout', checkout);
       window.open(url.toString(), '_blank');
     });
-
     document.getElementById('clearBtn').addEventListener('click', function(){
-      document.getElementById('destination').value = '';
-      document.getElementById('checkin').value = '';
-      document.getElementById('checkout').value = '';
-    });
-  </script>
-  <script>
-    // Force all clickable links/buttons to use your main affiliate link
-    const affiliate = "https://www.trip.com/t/PSAH4KF3HS2";
-    document.addEventListener('click', function(e){
-      const t = e.target.closest('a, button, .promo, .card, .iframe-wrap');
-      if(!t) return;
-      // Allow input fields to work normally
-      if(e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-      // If it's a real link, override
-      if(t.tagName === 'A'){ e.preventDefault(); window.open(affiliate, '_blank'); return; }
-      // Otherwise treat as clickable area
-      window.open(affiliate, '_blank');
+      document.getElementById('destination').value='';
+      document.getElementById('checkin').value='';
+      document.getElementById('checkout').value='';
     });
   </script>
 </body>
