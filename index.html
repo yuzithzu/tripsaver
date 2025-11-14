@@ -8,36 +8,76 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#f6f8fb;--card:#fff;--accent:#0b61ff;--muted:#6b7280;}
-    /* Pinalitan ang "*" selector ng mas specific na selectors para sa mas mabilis na rendering */
     html, body{margin:0;padding:0;}
     body{
         background:linear-gradient(180deg,var(--bg),#eef3ff);
         color:#0f1724;
         font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+        overflow-x: hidden; 
     }
     *{box-sizing:border-box;}
-    .container{max-width:1100px;margin:24px auto;padding:16px;display:flex;flex-direction:column;gap:20px;}
+    .container{max-width:1100px;margin:24px auto;padding:16px;display:flex;flex-direction:column;gap:20px;position:relative;z-index:2;}
     header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
     .brand{display:flex;align-items:center;gap:12px;}
     .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#6b9cff);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;}
     .title{font-size:18px;font-weight:700;}
     nav{display:flex;gap:12px;align-items:center;}
-    a.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(11,97,255,0.12);}
-
+    
+    a.btn{
+        background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(11,97,255,0.12);
+        transition: all 0.2s ease-out; 
+    }
+    a.btn:hover {
+        transform: translateY(-2px); 
+        box-shadow:0 8px 20px rgba(11,97,255,0.2);
+    }
+    
     /* Search card */
     .search-card{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 6px 18px rgba(15,23,36,0.06);display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;align-items:center;}
     .field{display:flex;flex-direction:column;}
-    label{font-size:12px;color:var(--muted);margin-bottom:6px;}
+    
+    label{
+        font-size:12px;color:var(--muted);margin-bottom:6px;
+        display:flex; align-items:center; gap: 5px; 
+    }
+    label svg { width: 14px; height: 14px; fill: var(--muted); }
+    
     input,select{padding:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px;}
     .wide{grid-column:1/-1;display:flex;gap:12px;}
     .search-actions{display:flex;gap:8px;align-items:center;}
+    .search-actions .btn { transition: all 0.2s ease-out; }
+    .search-actions .btn:hover { transform: scale(1.03); }
 
     /* PROMO SLIDER */
     .slider-container{position:relative;overflow:hidden;border-radius:14px;margin:20px 0;}
     .slider-track{display:flex;gap:14px;padding:12px;animation:slide 18s linear infinite;}
-    .slider-item{flex:0 0 auto;width:260px;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04);cursor:pointer;text-align:center;}
+    .slider-item{
+        flex:0 0 auto;width:260px;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04);cursor:pointer;text-align:center;
+        transition: all 0.2s ease-out; 
+    }
+    .slider-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.07);
+    }
+    /* --- NEW: ICONS FOR PROMO SLIDER --- */
+    .slider-item .icon-wrapper {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 12px auto;
+        border-radius: 50%;
+        background: #eef3ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .slider-item svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--accent);
+    }
     .slider-item h4{margin:0 0 6px 0;font-size:16px;font-weight:700;}
     .slider-item p{margin:0;font-size:13px;color:var(--muted);}
+    
     @keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
     @media(max-width:600px){.slider-item{width:70%;}}
 
@@ -52,16 +92,46 @@
     footer{margin:26px 0;text-align:center;color:var(--muted);font-size:13px;}
     .muted{color:var(--muted);font-size:13px;}
     .btn-ghost{background:transparent;border:1px solid #e6eefc;padding:9px;border-radius:10px;}
+    
+    /* --- UPDATED: FLYING AIRPLANE (MAS VISIBLE) --- */
+    .flying-plane {
+        position: fixed;
+        top: 10%;
+        left: -100px; 
+        z-index: 1; 
+        opacity: 0.4; /* Ginawang 0.4 mula 0.2 para mas kita */
+        animation: flyAcross 25s linear infinite;
+        transform: rotate(15deg);
+    }
+    .flying-plane svg {
+        width: 80px;
+        height: 80px;
+        fill: var(--accent);
+    }
+    @keyframes flyAcross {
+      0% { transform: translateX(0) rotate(15deg); }
+      100% { transform: translateX(120vw) rotate(15deg); } 
+    }
+    @media(max-width: 600px) {
+        .flying-plane { display: none; }
+    }
   </style>
 </head>
 <body>
+
+  <div class="flying-plane" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path d="M448 3.001c-12.273 0-24.28 4.41-33.453 13.08l-153.35 145.42-108.7-36.23c-20.06-6.69-41.59 1.91-53.51 19.66-11.92 17.75-8.6 42.06 7.5 55.6l103.94 86.62-85.38 81.1c-14.28 13.56-18.42 35.25-10.02 53.3 8.4 18.04 27.99 28.3 47.78 26.1l114.34-12.31 87.37 72.81c7.34 6.11 16.51 9.22 25.7 9.22 10.4 0 20.78-4.15 28.28-12.28 15.01-16.2 14.16-41.48-1.91-56.49L319.1 405.1l176.65-167.8c11.31-10.74 15.91-26.17 12.09-41.05-3.82-14.88-14.04-27.18-28.45-32.32L364.9 127.72l122.38-116.2c6.2-5.89 10.22-13.9 10.64-22.58C498.37 12.821 475.32 3.001 448 3.001z"/>
+    </svg>
+  </div>
+
   <div class="container">
     <header>
       <div class="brand">
         <div class="logo">TR</div>
         <div>
           <div class="title">TripSaver</div>
-          <div class="muted" style="font-size:12px">Choose differently—find great travel promos and book easily.</div>
+          <div class="muted" style="font-size:12px">Find great travel promos & book with affiliates</div>
         </div>
       </div>
       <nav>
@@ -73,7 +143,10 @@
 
     <section class="search-card" aria-label="Search flights and hotels">
       <div class="field">
-        <label for="type">Type</label>
+        <label for="type">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M192 0c-26.5 0-48 21.5-48 48v80H288V48c0-26.5-21.5-48-48-48H192zM0 160V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V160H0zm288 88c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h112c4.4 0 8 3.6 8 8v16z"/></svg>
+          Type
+        </label>
         <select id="type">
           <option>Flight + Hotel</option>
           <option>Flight</option>
@@ -82,19 +155,31 @@
         </select>
       </div>
       <div class="field">
-        <label for="destination">Destination</label>
+        <label for="destination">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 86 86 0 192 0s192 86 192 192c0 87.4-116.1 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0zM192 256c35.3 0 64-28.7 64-64s-28.7-64-64-64s-64 28.7-64 64s28.7 64 64 64z"/></svg>
+          Destination
+        </label>
         <input id="destination" placeholder="Where to? (e.g. Singapore)" />
       </div>
       <div class="field">
-        <label for="checkin">Check-in</label>
+        <label for="checkin">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M128 0c-17.7 0-32 14.3-32 32V64H288V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32zM448 160H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V160zM312 280c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm128 64c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg>
+          Check-in
+        </label>
         <input id="checkin" type="date" />
       </div>
       <div class="field">
-        <label for="checkout">Check-out</label>
+        <label for="checkout">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M128 0c-17.7 0-32 14.3-32 32V64H288V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32zM448 160H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V160zM312 280c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm128 64c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg>
+          Check-out
+        </label>
         <input id="checkout" type="date" />
       </div>
       <div class="field">
-        <label for="guests">Guests</label>
+        <label for="guests">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+          Guests
+        </label>
         <select id="guests">
           <option>1 Adult</option>
           <option>2 Adults</option>
@@ -102,7 +187,10 @@
         </select>
       </div>
       <div class="field">
-        <label for="class">Class / Room</label>
+        <label for="class">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 0C21.5 0 0 21.5 0 48V224H192V48c0-26.5-21.5-48-48-48H48zM0 272V464c0 26.5 21.5 48 48 48H144c26.5 0 48-21.5 48-48V272H0zM320 0c-26.5 0-48 21.5-48 48V464c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H320z"/></svg>
+          Class / Room
+        </label>
         <select id="class">
           <option>Economy</option>
           <option>Premium Economy</option>
@@ -124,26 +212,45 @@
       <div class="slider-container">
         <div class="slider-track">
           <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/28065/everydayescape.html','_blank')">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 0C400 0 288 32 288 32S272 0 256 0s-32 32-32 32-16-32-32-32-32 32-32 32S144 0 128 0 96 32 96 32 80 0 64 0 32 32 32 32 16 0 0 0v16C0 144 64 224 160 224s160-80 160-192V0zM160 256c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm160-64h192v32H320v-32zm0 64h192v32H320v-32zm0 64h192v32H320v-32z"/></svg>
+            </div>
             <h4>Everyday Escape</h4>
             <p>Special savings on everyday getaways.</p>
           </div>
           <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/27435/holidaydeals2025.html','_blank')">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M200.7 200.7l111.4 111.4c-6.8 10.5-10.4 22.6-10.4 35.3c0 35 28.5 63.3 63.3 63.3s63.3-28.5 63.3-63.3s-28.5-63.3-63.3-63.3c-12.7 0-24.8 3.5-35.3 10.4L288 147.3V96h16c8.8 0 16-7.2 16-16s-7.2-16-16-16H288V48c0-8.8-7.2-16-16-16s-16 7.2-16 16v16H240c-8.8 0-16 7.2-16 16s7.2 16 16 16h16v51.3L147.3 208c-10.5-6.8-22.6-10.4-35.3-10.4C77 197.7 48.7 226 48.7 261s28.5 63.3 63.3 63.3s63.3-28.5 63.3-63.3c0-12.7-3.5-24.8-10.4-35.3zM448.7 324.7c0 26-21.3 47.3-47.3 47.3s-47.3-21.3-47.3-47.3s21.3-47.3 47.3-47.3s47.3 21.3 47.3 47.3zM112 293.3c-17.3 0-31.3-14-31.3-31.3s14-31.3 31.3-31.3s31.3 14 31.3 31.3s-14 31.3-31.3 31.3z"/></svg>
+            </div>
             <h4>Holiday Deals 2025</h4>
             <p>Seasonal discounts & curated packages.</p>
           </div>
           <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/14373/swisstravelpass2025.html','_blank')">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M144 48C144 21.5 165.5 0 192 0h128c26.5 0 48 21.5 48 48v96h64c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32v-32c0-17.7 14.3-32 32-32h64V48zM192 96h128V48H192v48zm0 160h128v64H192v-64zM480 320h32c0-53-43-96-96-96v32c35.3 0 64 28.7 64 64zM0 320c0-35.3 28.7-64 64-64v-32C28.7 224 0 267 0 320h32zM32 352v64c0 17.7 14.3 32 32 32H448c17.7 0 32-14.3 32-32v-64H32zm64 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm320 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+            </div>
             <h4>Swiss Travel Pass 2025</h4>
             <p>Rail passes, experiences & tours.</p>
           </div>
           <div class="slider-item" onclick="window.open('https://sg.trip.com/travel-ideas/channel/365','_blank')">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M384 476.1L192 421.2V35.9L384 90.8V476.1zm-192-13.2L32 449.4V6.6L192 51.5V462.9zM544 6.6V449.4L384 494.3V90.8L544 6.6z"/></svg>
+            </div>
             <h4>Travel Ideas</h4>
             <p>Inspiration, guides & curated channels.</p>
           </div>
+          
           <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/28065/everydayescape.html','_blank')">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M416 0C400 0 288 32 288 32S272 0 256 0s-32 32-32 32-16-32-32-32-32 32-32 32S144 0 128 0 96 32 96 32 80 0 64 0 32 32 32 32 16 0 0 0v16C0 144 64 224 160 224s160-80 160-192V0zM160 256c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm160-64h192v32H320v-32zm0 64h192v32H320v-32zm0 64h192v32H320v-32z"/></svg>
+            </div>
             <h4>Everyday Escape</h4>
             <p>Special savings on everyday getaways.</p>
           </div>
           <div class="slider-item" onclick="window.open('https://sg.trip.com/sale/w/27435/holidaydeals2025.html','_blank')">
+            <div class="icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M200.7 200.7l111.4 111.4c-6.8 10.5-10.4 22.6-10.4 35.3c0 35 28.5 63.3 63.3 63.3s63.3-28.5 63.3-63.3s-28.5-63.3-63.3-63.3c-12.7 0-24.8 3.5-35.3 10.4L288 147.3V96h16c8.8 0 16-7.2 16-16s-7.2-16-16-16H288V48c0-8.8-7.2-16-16-16s-16 7.2-16 16v16H240c-8.8 0-16 7.2-16 16s7.2 16 16 16h16v51.3L147.3 208c-10.5-6.8-22.6-10.4-35.3-10.4C77 197.7 48.7 226 48.7 261s28.5 63.3 63.3 63.3s63.3-28.5 63.3-63.3c0-12.7-3.5-24.8-10.4-35.3zM448.7 324.7c0 26-21.3 47.3-47.3 47.3s-47.3-21.3-47.3-47.3s21.3-47.3 47.3-47.3s47.3 21.3 47.3 47.3zM112 293.3c-17.3 0-31.3-14-31.3-31.3s14-31.3 31.3-31.3s31.3 14 31.3 31.3s-14 31.3-31.3 31.3z"/></svg>
+            </div>
             <h4>Holiday Deals 2025</h4>
             <p>Seasonal discounts & curated packages.</p>
           </div>
