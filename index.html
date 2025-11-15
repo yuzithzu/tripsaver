@@ -13,7 +13,7 @@
         background:linear-gradient(180deg,var(--bg),#eef3ff);
         color:#0f1724;
         font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-        overflow-x: hidden; 
+        overflow-x: hidden;  
     }
     *{box-sizing:border-box;}
     .container{max-width:1100px;margin:24px auto;padding:16px;display:flex;flex-direction:column;gap:20px;position:relative;z-index:2;}
@@ -25,10 +25,10 @@
     
     a.btn{
         background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(11,97,255,0.12);
-        transition: all 0.2s ease-out; 
+        transition: all 0.2s ease-out;  
     }
     a.btn:hover {
-        transform: translateY(-2px); 
+        transform: translateY(-2px);  
         box-shadow:0 8px 20px rgba(11,97,255,0.2);
     }
     
@@ -38,11 +38,11 @@
     
     label{
         font-size:12px;color:var(--muted);margin-bottom:6px;
-        display:flex; align-items:center; gap: 5px; 
+        display:flex; align-items:center; gap: 5px;  
     }
     label svg { width: 14px; height: 14px; fill: var(--muted); }
     
-    input,select{padding:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px;}
+    input,select{padding:10px;border-radius:8px;border:1px solid #e6eefc;font-size:14px; width: 100%;} /* Nagdagdag ng width: 100% para pare-pareho */
     .wide{grid-column:1/-1;display:flex;gap:12px;}
     .search-actions{display:flex;gap:8px;align-items:center;}
     .search-actions .btn { transition: all 0.2s ease-out; }
@@ -53,7 +53,7 @@
     .slider-track{display:flex;gap:14px;padding:12px;animation:slide 18s linear infinite;}
     .slider-item{
         flex:0 0 auto;width:260px;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04);cursor:pointer;text-align:center;
-        transition: all 0.2s ease-out; 
+        transition: all 0.2s ease-out;  
     }
     .slider-item:hover {
         transform: translateY(-4px);
@@ -97,8 +97,8 @@
     .flying-plane {
         position: fixed;
         top: 10%;
-        left: -100px; 
-        z-index: 1; 
+        left: -100px;  
+        z-index: 1;  
         opacity: 0.4; /* Ginawang 0.4 mula 0.2 para mas kita */
         animation: flyAcross 25s linear infinite;
         transform: rotate(15deg);
@@ -110,7 +110,7 @@
     }
     @keyframes flyAcross {
       0% { transform: translateX(0) rotate(15deg); }
-      100% { transform: translateX(120vw) rotate(15deg); } 
+      100% { transform: translateX(120vw) rotate(15deg); }  
     }
     @media(max-width: 600px) {
         .flying-plane { display: none; }
@@ -154,6 +154,15 @@
           <option>Train</option>
         </select>
       </div>
+      
+      <div class="field">
+        <label for="origin">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M224 192L48 245.4V288l176-53.4V384h-32v32h112v-32h-32V234.6L464 288v-42.6L288 192v-80c0-26.5-21.5-48-48-48s-48 21.5-48 48v80z"/></svg>
+          Origin
+        </label>
+        <input id="origin" placeholder="Where from? (e.g. Manila)" />
+      </div>
+
       <div class="field">
         <label for="destination">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 86 86 0 192 0s192 86 192 192c0 87.4-116.1 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0zM192 256c35.3 0 64-28.7 64-64s-28.7-64-64-64s-64 28.7-64 64s28.7 64 64 64z"/></svg>
@@ -161,6 +170,7 @@
         </label>
         <input id="destination" placeholder="Where to? (e.g. Singapore)" />
       </div>
+      
       <div class="field">
         <label for="checkin">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M128 0c-17.7 0-32 14.3-32 32V64H288V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32zM448 160H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V160zM312 280c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm128 64c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg>
@@ -175,17 +185,23 @@
         </label>
         <input id="checkout" type="date" />
       </div>
+
       <div class="field">
-        <label for="guests">
+        <label for="adults">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-          Guests
+          Adults
         </label>
-        <select id="guests">
-          <option>1 Adult</option>
-          <option>2 Adults</option>
-          <option>Family (2 Adults, 1 Child)</option>
-        </select>
+        <input id="adults" type="number" value="1" min="1" />
       </div>
+      
+      <div class="field">
+        <label for="children">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M192 0C165.5 0 144 21.5 144 48v80c0 26.5 21.5 48 48 48s48-21.5 48-48V48c0-26.5-21.5-48-48-48zM128 192c0-35.3 28.7-64 64-64s64 28.7 64 64v64h32c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64v-32c0-35.3 28.7-64 64-64h32V192zM64 480c-17.7 0-32 14.3-32 32s14.3 32 32 32H320c17.7 0 32-14.3 32-32s-14.3-32-32-32H64z"/></svg>
+          Children
+        </label>
+        <input id="children" type="number" value="0" min="0" />
+      </div>
+
       <div class="field">
         <label for="class">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M48 0C21.5 0 0 21.5 0 48V224H192V48c0-26.5-21.5-48-48-48H48zM0 272V464c0 26.5 21.5 48 48 48H144c26.5 0 48-21.5 48-48V272H0zM320 0c-26.5 0-48 21.5-48 48V464c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H320z"/></svg>
@@ -207,7 +223,6 @@
         <a href="https://www.trip.com/w/KrcJGyZ6HS2" target="_blank" rel="noopener noreferrer" class="muted" style="text-decoration:none;">Exclusive Flight Deals here</a>
       </div>
     </section>
-
     <section class="promo-slider" id="promos-section">
       <div class="slider-container">
         <div class="slider-track">
@@ -260,15 +275,15 @@
     
     <section class="iframe-grid" id="affiliates-section" aria-label="Affiliate Banners">
         <div class="iframe-item">
-            <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1=" 
+            <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1="  
                 frameborder="0" scrolling="no" title="Trip.com Banner 1" style="border:none;" loading="lazy"></iframe>
         </div>
         <div class="iframe-item">
-            <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1=" 
+            <iframe src="https://www.trip.com/partners/ad/SB6639173?Allianceid=7325312&SID=274746697&trip_sub1="  
                 frameborder="0" scrolling="no" title="Trip.com Banner 2" style="border:none;" loading="lazy"></iframe>
         </div>
         <div class="iframe-item">
-            <iframe src="https://www.trip.com/partners/ad/DB6637990?Allianceid=7325312&SID=274746697&trip_sub1=" 
+            <iframe src="https://www.trip.com/partners/ad/DB6637990?Allianceid=7325312&SID=274746697&trip_sub1="  
                 frameborder="0" scrolling="no" title="Trip.com Banner 3" style="border:none;" loading="lazy"></iframe>
         </div>
     </section>
@@ -280,17 +295,24 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Search button logic (nanatiling simple, kumukuha lang ng destination)
     document.getElementById('searchBtn').addEventListener('click', function(){
       const dest = encodeURIComponent(document.getElementById('destination').value || '');
       const url = new URL('https://www.trip.com/t/PSAH4KF3HS2');
       if(dest) url.searchParams.set('trip_sub1', dest);
       window.open(url.toString(), '_blank');
     });
+
+    // Clear button logic (updated para isama ang mga bagong field)
     document.getElementById('clearBtn').addEventListener('click', function(){
+      document.getElementById('origin').value=''; // IDINAGDAG
       document.getElementById('destination').value='';
       document.getElementById('checkin').value='';
       document.getElementById('checkout').value='';
+      document.getElementById('adults').value='1'; // BINAGO
+      document.getElementById('children').value='0'; // IDINAGDAG
     });
   </script>
-</body>
+  </body>
 </html>
