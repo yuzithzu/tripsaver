@@ -181,12 +181,21 @@
         }
         .sidebar-left { display: none; }
     }
+    
+    /* ============================================== */
+    /* ITO ANG INAYOS PARA SA MOBILE VIEW */
+    /* ============================================== */
     @media(max-width: 1200px) {
         .page-wrapper {
-            grid-template-columns: minmax(auto, 1100px);
+            /* Nagiging single column at nag-re-resize nang tama */
+            grid-template-columns: minmax(0, 1fr); 
         }
         .sidebar-right { display: none; }
     }
+    /* ============================================== */
+    /* END NG PAG-AAYOS */
+    /* ============================================== */
+    
     @media(max-width: 600px) {
         .flying-plane { display: none; }
         .page-wrapper { padding: 0 8px; margin: 8px auto; }
@@ -215,6 +224,7 @@
         <small id="wDesc">--</small><br>
         <small id="wNext">Next update: --</small>
       </div>
+      
       <div class="sidebar-ad-container">
         <iframe 
           id="TD6700724"
@@ -239,7 +249,7 @@
         </div>
         <nav>
           <a class="muted" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener noreferrer">Promos</a>
-          <a class="muted" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener noreferrer">Hot Deals</a>
+          <a class="muted" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener noreferrer">Affiliates</a>
           <a class="btn" href="https://www.trip.com/t/PSAH4KF3HS2" target="_blank" rel="noopener noreferrer">Book Now</a>
         </nav>
       </header>
@@ -369,6 +379,7 @@
           Next update: --
         </small>
       </div>
+      
       <div class="sidebar-ad-container">
         <iframe 
           id="TD6700766"
@@ -383,7 +394,7 @@
 
   </div>
   <script>
-    // --- BAGONG WEATHER SCRIPT (MET.NO) ---
+    // --- WEATHER SCRIPT (MET.NO) ---
     const LAT = 14.5995;  // Manila Latitude
     const LON = 120.9842; // Manila Longitude
 
@@ -445,7 +456,7 @@
   </script>
 
   <script>
-    // --- BAGONG NEWS SCRIPT (RSS2JSON) ---
+    // --- NEWS SCRIPT (RSS2JSON) ---
     const RSS_URL = "https://news.google.com/rss?hl=en-PH&gl=PH&ceid=PH:en";
     const API = "https://api.rss2json.com/v1/api.json?rss_url=" + RSS_URL;
 
